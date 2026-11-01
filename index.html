@@ -60,6 +60,7 @@
         <div id="messages" class="messages"></div>
         <form id="chat-form" class="chat-form">
           <textarea id="chat-input" rows="1" placeholder="JARVIS-இடம் கேளுங்கள்…"></textarea>
+          <button type="button" id="mic-btn" class="btn mic" title="பேசு">🎤</button>
           <button type="submit" id="send-btn" class="btn send">➤</button>
         </form>
       </section>
@@ -96,6 +97,46 @@
 
         <div id="mem-count" class="muted small"></div>
         <div id="mem-list"></div>
+      </section>
+
+      <!-- VOICE -->
+      <section id="view-voice" class="view">
+        <h3 class="section">🎙️ Voice AI</h3>
+        <p id="voice-support" class="muted small"></p>
+
+        <label class="toggle">
+          <input id="voice-auto" type="checkbox" />
+          <span>JARVIS பதிலைத் தானாகப் பேசு</span>
+        </label>
+        <label class="toggle">
+          <input id="voice-autosend" type="checkbox" />
+          <span>நான் பேசி முடித்ததும் தானாக அனுப்பு</span>
+        </label>
+
+        <label class="vlabel">நான் பேசும் மொழி (🎤 மைக்)</label>
+        <select id="voice-mic-lang">
+          <option value="ta-IN">தமிழ்</option>
+          <option value="en-IN">English (India)</option>
+        </select>
+
+        <label class="vlabel">தமிழ் குரல்</label>
+        <select id="voice-ta"></select>
+        <label class="vlabel">English குரல்</label>
+        <select id="voice-en"></select>
+        <div id="voice-count" class="muted small"></div>
+        <p id="voice-ta-hint" class="warn hidden">தமிழ் குரல் எதுவும் கிடைக்கவில்லை. Phone Settings-ல் "Text-to-speech" என்று தேடி, Google Text-to-speech → தமிழ் குரல் data-வை install செய்யுங்கள்.</p>
+
+        <label class="vlabel">பேசும் வேகம் <span id="voice-rate-val"></span></label>
+        <input id="voice-rate" type="range" min="0.6" max="1.4" step="0.1" />
+
+        <div class="row">
+          <button id="voice-test-ta" type="button" class="btn ghost">தமிழ் சோதி</button>
+          <button id="voice-test-en" type="button" class="btn ghost">English சோதி</button>
+          <button id="voice-stop" type="button" class="btn ghost danger">நிறுத்து</button>
+        </div>
+
+        <p class="muted small">பெண் குரல்: browser குரலின் பாலினத்தைச் சொல்லாது. ஒவ்வொரு குரலையும் தேர்ந்தெடுத்து "சோதி" அழுத்திக் கேட்டு, உங்களுக்குப் பிடித்த பெண் குரலைத் தேர்ந்தெடுங்கள்.</p>
+        <p class="warn">மைக் பயன்படுத்தும்போது Chrome உங்கள் பேச்சை Google சேவையகத்துக்கு அனுப்பி எழுத்தாக்கும் (internet தேவை). பொது இடத்தில் தனிப்பட்ட தகவல்களைப் பேச வேண்டாம்.</p>
       </section>
 
       <!-- SETTINGS -->
@@ -146,6 +187,7 @@
   <script src="config.js"></script>
   <script src="storage.js"></script>
   <script src="memory.js"></script>
+  <script src="voice.js"></script>
   <script src="security.js"></script>
   <script src="gemini.js"></script>
   <script src="chat.js"></script>

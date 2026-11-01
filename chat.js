@@ -1,4 +1,4 @@
-// JARVIS – Chat interface
+// JARVIS – Chat interface (எழுத்து + குரல்)
 JARVIS.chat = (function () {
   const S = JARVIS.storage;
   let history = S.get("chat", []);
@@ -6,10 +6,24 @@ JARVIS.chat = (function () {
 
   const $ = (id) => document.getElementById(id);
 
+  // AI பதிலை எழுதி, வாசிக்கும் 🔊 பொத்தானைச் சேர்
+  function setAiText(div, text) {
+    div.textContent = text; // textContent = பாதுகாப்பானது (HTML injection இல்லை)
+    if (text && JARVIS.voice && JARVIS.voice.ttsSupported) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "spk";
+      b.textContent = "🔊";
+      b.title = "வாசி / நிறுத்து";
+      b.addEventListener("click", () => JARVIS.voice.toggleSpeak(text));
+      div.appendChild(b);
+    }
+  }
+
   function addBubble(kind, text) {
     const div = document.createElement("div");
     div.className = "msg " + kind;
-    div.textContent = text; // textContent = பாதுகாப்பானது (HTML injection இல்லை)
+    if (kind === "ai") setAiText(div, text); else div.textContent = text;
     $("messages").appendChild(div);
     $("messages").scrollTop = $("messages").scrollHeight;
     return div;
@@ -45,7 +59,9 @@ JARVIS.chat = (function () {
       const reply = await JARVIS.gemini.ask(history);
       history.push({ role: "ai", text: reply });
       save();
-      wait.textContent = reply;
+      wait.innerHTML = "";
+      setAiText(wait, reply);
+      if (JARVIS.voice) JARVIS.voice.speakIfAuto(reply);
     } catch (e) {
       wait.className = "msg err";
       wait.textContent = e.message;
@@ -59,6 +75,29 @@ JARVIS.chat = (function () {
 
   function clear() { history = []; S.remove("chat"); render(); }
 
+  function initMic(input) {
+    const mic = $("mic-btn");
+    if (!JARVIS.voice || !JARVIS.voice.sttSupported) { mic.classList.add("hidden"); return; }
+
+    mic.addEventListener("click", () => {
+      const V = JARVIS.voice;
+      if (V.isListening()) { V.stopListening(); return; }
+      mic.classList.add("rec");
+      input.placeholder = "கேட்கிறேன்… பேசுங்கள்";
+      V.listen({
+        onResult: (t) => { input.value = t; },
+        onEnd: (finalText, err) => {
+          mic.classList.remove("rec");
+          input.placeholder = "JARVIS-இடம் கேளுங்கள்…";
+          if (err) { addBubble("err", err); return; }
+          if (!finalText) return;
+          if (V.autoSend()) { input.value = ""; send(finalText); }
+          else { input.value = finalText; input.focus(); }
+        }
+      });
+    });
+  }
+
   function init() {
     render();
     const input = $("chat-input");
@@ -67,13 +106,15 @@ JARVIS.chat = (function () {
       const t = input.value;
       input.value = "";
       input.style.height = "auto";
+      if (JARVIS.voice) JARVIS.voice.stopSpeak();
       send(t);
     });
     input.addEventListener("input", () => {
       input.style.height = "auto";
       input.style.height = Math.min(input.scrollHeight, 120) + "px";
     });
+    initMic(input);
   }
 
-  return { init, clear };
+  return { init, clear, send };
 })();

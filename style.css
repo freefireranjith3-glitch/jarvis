@@ -102,3 +102,12 @@ input:focus,textarea:focus{border-color:var(--cyan);box-shadow:0 0 10px rgba(0,2
 input[type=checkbox]{width:22px;height:22px;margin:2px 0 0;flex:none;accent-color:#00d4ff}
 .warn{color:#ffcf5a;font-size:12px;line-height:1.5}
 #mem-form{margin:12px 0}
+
+/* voice */
+select{width:100%;background:rgba(0,20,45,.7);border:1px solid var(--line);border-radius:10px;color:var(--text);padding:12px;font:inherit;margin:6px 0}
+select option{background:#06182e;color:var(--text)}
+input[type=range]{padding:0;accent-color:#00d4ff}
+.vlabel{display:block;margin-top:14px;color:var(--muted);font-size:13px}
+.spk{display:block;margin-top:6px;background:none;border:1px solid var(--line);color:var(--cyan2);border-radius:10px;padding:2px 10px;font-size:14px}
+.mic{padding:0 14px;font-size:18px}
+.mic.rec{border-color:var(--danger);box-shadow:0 0 14px var(--danger);animation:blink 1s infinite}

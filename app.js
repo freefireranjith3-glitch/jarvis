@@ -112,6 +112,7 @@
   JARVIS.dashboard.init(openModule);
   JARVIS.chat.init();
   JARVIS.memory.init();
+  JARVIS.voice.init();
   loadSettings();
   if (Sec.hasPin()) showLock("unlock");
 

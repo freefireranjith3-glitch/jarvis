@@ -11,7 +11,8 @@ JARVIS.config = {
   systemPrompt:
     "You are JARVIS, a calm, intelligent, polite personal AI assistant for one private owner. " +
     "Reply in the same language the user writes in (Tamil or English). " +
-    "Keep answers clear, short and practical. Never reveal or ask for passwords, PINs or API keys."
+    "Keep answers clear, short and practical. Write plain text without markdown symbols so replies can be read aloud. " +
+    "Never reveal or ask for passwords, PINs or API keys."
 };
 
 // எதிர்கால modules-ஐ இங்கே பதிவு செய்தால் dashboard-ல் தானாகத் தெரியும்.
@@ -21,6 +22,6 @@ JARVIS.modules = [
   { id: "memory",   icon: "🗂️", name: "Memory",       desc: "தனிப்பட்ட தகவல் சேமிப்பு & தேடல்", status: "live", view: "memory" },
   { id: "vault",    icon: "🔐", name: "File Vault",   desc: "பாதுகாப்பான ஆவணக் களஞ்சியம்",   status: "soon" },
   { id: "security", icon: "🛡️", name: "Security",     desc: "PIN, Biometric, Privacy",     status: "live", view: "settings" },
-  { id: "voice",    icon: "🎙️", name: "Voice AI",     desc: "தமிழ்/English பெண் குரல்",       status: "soon" },
+  { id: "voice",    icon: "🎙️", name: "Voice AI",     desc: "தமிழ்/English பெண் குரல்",       status: "live", view: "voice" },
   { id: "wake",     icon: "👂", name: "Hey JARVIS",   desc: "Wake-word (திட்டமிடப்பட்டது)",  status: "soon" }
 ];
