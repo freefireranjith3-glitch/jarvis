@@ -22,6 +22,7 @@
     <input id="lock-input2" class="hidden" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="8" autocomplete="off" placeholder="மீண்டும் உள்ளிடவும்" />
     <p id="lock-msg" class="error"></p>
     <button id="lock-btn" class="btn">திறக்க</button>
+    <button id="lock-bio" class="btn ghost hidden">🖐 கைரேகையால் திற</button>
     <button id="lock-skip" class="link hidden">இப்போது வேண்டாம்</button>
   </div>
 
@@ -199,6 +200,12 @@
           <button id="pin-set" class="btn ghost">PIN அமை / மாற்று</button>
           <button id="pin-remove" class="btn ghost">PIN நீக்கு</button>
         </div>
+        <div class="row">
+          <button id="bio-enable" class="btn ghost">🖐 கைரேகை இயக்கு</button>
+          <button id="bio-disable" class="btn ghost hidden">கைரேகை நிறுத்து</button>
+        </div>
+        <p id="bio-status" class="muted small"></p>
+        <p class="muted small">கைரேகை App-ன் PIN திரையைத் திறக்க மட்டும். File Vault-ஐ அது திறக்காது (Vault கடவுச்சொல் தேவை).</p>
 
         <h3 class="section">Data</h3>
         <div class="row">
@@ -232,6 +239,7 @@
   <script src="voice.js"></script>
   <script src="vault.js"></script>
   <script src="security.js"></script>
+  <script src="biometric.js"></script>
   <script src="gemini.js"></script>
   <script src="chat.js"></script>
   <script src="dashboard.js"></script>

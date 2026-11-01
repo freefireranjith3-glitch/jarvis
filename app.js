@@ -35,6 +35,7 @@
     const setup = mode === "setup";
     $("lock-input2").classList.toggle("hidden", !setup);
     $("lock-skip").classList.toggle("hidden", !setup);
+    $("lock-bio").classList.toggle("hidden", setup || !JARVIS.biometric.isEnrolled());
     $("lock-title").textContent = setup ? "புதிய PIN அமைக்கவும்" : "PIN உள்ளிடவும்";
     $("lock-sub").textContent = setup ? "4 முதல் 8 எண்கள்" : "JARVIS பூட்டப்பட்டுள்ளது";
     $("lock-btn").textContent = setup ? "PIN சேமி" : "திற";
@@ -63,6 +64,11 @@
   $("lock-btn").addEventListener("click", submitLock);
   $("lock-input").addEventListener("keydown", (e) => { if (e.key === "Enter" && lockMode === "unlock") submitLock(); });
   $("lock-skip").addEventListener("click", hideLock);
+  $("lock-bio").addEventListener("click", async () => {
+    $("lock-msg").textContent = "";
+    const r = await JARVIS.biometric.authenticate();
+    if (r.ok) hideLock(); else $("lock-msg").textContent = r.error + " PIN-ஐப் பயன்படுத்தலாம்.";
+  });
 
   // App background-ல் சென்று திரும்பினால் தானாகப் பூட்டு
   let hiddenAt = 0;
@@ -106,7 +112,30 @@
   $("pin-set").addEventListener("click", () => showLock("setup"));
   $("pin-remove").addEventListener("click", () => {
     if (!Sec.hasPin()) return note("PIN அமைக்கப்படவில்லை.");
-    if (confirm("PIN-ஐ நீக்கவா?")) { Sec.removePin(); JARVIS.dashboard.refreshStatus(); note("PIN நீக்கப்பட்டது."); }
+    if (confirm("PIN-ஐ நீக்கவா?")) { Sec.removePin(); JARVIS.biometric.remove(); refreshBioUI(); JARVIS.dashboard.refreshStatus(); note("PIN நீக்கப்பட்டது (கைரேகையும் நீக்கப்பட்டது)."); }
+  });
+
+  /* ---------- Biometric (Settings) ---------- */
+  function refreshBioUI() {
+    const B = JARVIS.biometric;
+    const on = B.isEnrolled();
+    $("bio-enable").classList.toggle("hidden", on);
+    $("bio-disable").classList.toggle("hidden", !on);
+    $("bio-status").textContent = on ? "கைரேகை: இயக்கத்தில் ✔ (PIN திரையில் கைரேகை பொத்தான் தெரியும்)"
+      : B.isSupported() ? "கைரேகை: இயக்கப்படவில்லை" : "கைரேகை: இந்த phone/browser-ல் கிடைக்கவில்லை";
+  }
+  $("bio-enable").addEventListener("click", async () => {
+    if (!Sec.hasPin()) return note("முதலில் PIN அமையுங்கள். கைரேகை PIN-க்கு மாற்று வழி மட்டுமே.");
+    note("Phone-ன் கைரேகை கேட்கும்…");
+    const r = await JARVIS.biometric.enroll();
+    note(r.ok ? "கைரேகை இயக்கப்பட்டது ✔" : "✖ " + r.error);
+    refreshBioUI();
+  });
+  $("bio-disable").addEventListener("click", () => {
+    if (!confirm("கைரேகை வசதியை நிறுத்தவா?")) return;
+    JARVIS.biometric.remove();
+    refreshBioUI();
+    note("கைரேகை நிறுத்தப்பட்டது.");
   });
 
   /* ---------- Start ---------- */
@@ -116,6 +145,8 @@
   JARVIS.voice.init();
   JARVIS.vault.init();
   loadSettings();
+  refreshBioUI();
+  JARVIS.biometric.init().then(refreshBioUI);
   if (Sec.hasPin()) showLock("unlock");
 
   if ("serviceWorker" in navigator) {
