@@ -27,6 +27,7 @@
 
   function showLock(mode) {
     lockMode = mode;
+    if (JARVIS.vault) JARVIS.vault.lock(); // app பூட்டப்பட்டால் Vault-ம் பூட்டப்படும்
     $("lock").classList.remove("hidden");
     $("lock-input").value = "";
     $("lock-input2").value = "";
@@ -113,6 +114,7 @@
   JARVIS.chat.init();
   JARVIS.memory.init();
   JARVIS.voice.init();
+  JARVIS.vault.init();
   loadSettings();
   if (Sec.hasPin()) showLock("unlock");
 

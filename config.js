@@ -20,7 +20,7 @@ JARVIS.config = {
 JARVIS.modules = [
   { id: "chat",     icon: "🧠", name: "AI Brain",     desc: "Gemini உடன் உரையாடல்",        status: "live", view: "chat" },
   { id: "memory",   icon: "🗂️", name: "Memory",       desc: "தனிப்பட்ட தகவல் சேமிப்பு & தேடல்", status: "live", view: "memory" },
-  { id: "vault",    icon: "🔐", name: "File Vault",   desc: "பாதுகாப்பான ஆவணக் களஞ்சியம்",   status: "soon" },
+  { id: "vault",    icon: "🔐", name: "File Vault",   desc: "பாதுகாப்பான ஆவணக் களஞ்சியம்",   status: "live", view: "vault" },
   { id: "security", icon: "🛡️", name: "Security",     desc: "PIN, Biometric, Privacy",     status: "live", view: "settings" },
   { id: "voice",    icon: "🎙️", name: "Voice AI",     desc: "தமிழ்/English பெண் குரல்",       status: "live", view: "voice" },
   { id: "wake",     icon: "👂", name: "Hey JARVIS",   desc: "Wake-word (திட்டமிடப்பட்டது)",  status: "soon" }

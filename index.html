@@ -139,6 +139,48 @@
         <p class="warn">மைக் பயன்படுத்தும்போது Chrome உங்கள் பேச்சை Google சேவையகத்துக்கு அனுப்பி எழுத்தாக்கும் (internet தேவை). பொது இடத்தில் தனிப்பட்ட தகவல்களைப் பேச வேண்டாம்.</p>
       </section>
 
+      <!-- FILE VAULT -->
+      <section id="view-vault" class="view">
+        <h3 class="section">🔐 File Vault</h3>
+        <p class="muted small">ஆவணங்கள் AES-256 மூலம் குறியாக்கம் செய்யப்பட்டு, உங்கள் phone-லேயே மட்டும் சேமிக்கப்படும். எங்கும் upload ஆகாது.</p>
+
+        <div id="vault-setup" class="hidden">
+          <div class="card">
+            <b>Vault கடவுச்சொல் உருவாக்கு</b>
+            <p class="muted small">இது PIN-ஐ விட நீளமானதாக இருக்க வேண்டும் (குறைந்தது 8 எழுத்துகள்). மூன்று நான்கு சொற்கள் சேர்ந்த வாக்கியம் வலிமையானது.</p>
+            <input id="vault-pass1" type="password" autocomplete="new-password" placeholder="Vault கடவுச்சொல்" />
+            <input id="vault-pass2" type="password" autocomplete="new-password" placeholder="மீண்டும் உள்ளிடவும்" />
+            <label class="toggle">
+              <input id="vault-ack" type="checkbox" />
+              <span>கடவுச்சொல்லை மறந்தால் என் file-களை யாராலும் மீட்க முடியாது என்பதைப் புரிந்துகொண்டேன்.</span>
+            </label>
+            <button id="vault-setup-btn" type="button" class="btn wide">Vault உருவாக்கு</button>
+          </div>
+        </div>
+
+        <div id="vault-locked" class="hidden">
+          <div class="card">
+            <b>🔒 Vault பூட்டப்பட்டுள்ளது</b>
+            <input id="vault-pass" type="password" autocomplete="current-password" placeholder="Vault கடவுச்சொல்" />
+            <button id="vault-unlock-btn" type="button" class="btn wide">திற</button>
+          </div>
+          <button id="vault-destroy" type="button" class="link">கடவுச்சொல் மறந்துவிட்டேனா? Vault-ஐ அழி</button>
+        </div>
+
+        <div id="vault-open" class="hidden">
+          <div class="row">
+            <button id="vault-add-btn" type="button" class="btn">＋ File சேர்</button>
+            <button id="vault-lock-btn" type="button" class="btn ghost">🔒 பூட்டு</button>
+            <input id="vault-file" type="file" multiple class="hidden" />
+          </div>
+          <div id="vault-count" class="muted small"></div>
+          <div id="vault-list"></div>
+          <p class="warn">⚠ Vault-ல் இருந்து பதிவிறக்கிய நகல் குறியாக்கம் இல்லாதது. App பூட்டப்பட்டாலோ, background-ல் 60 விநாடிக்கு மேல் இருந்தாலோ Vault தானாகப் பூட்டப்படும். ஒவ்வொரு file-க்கும் 30 MB வரம்பு.</p>
+        </div>
+
+        <p id="vault-msg" class="muted"></p>
+      </section>
+
       <!-- SETTINGS -->
       <section id="view-settings" class="view">
         <h3 class="section">Gemini API Key</h3>
@@ -188,6 +230,7 @@
   <script src="storage.js"></script>
   <script src="memory.js"></script>
   <script src="voice.js"></script>
+  <script src="vault.js"></script>
   <script src="security.js"></script>
   <script src="gemini.js"></script>
   <script src="chat.js"></script>
