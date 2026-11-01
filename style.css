@@ -85,3 +85,20 @@ input:focus,textarea:focus{border-color:var(--cyan);box-shadow:0 0 10px rgba(0,2
 .lock{position:fixed;inset:0;z-index:99;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center}
 .lock input{max-width:260px;text-align:center;font-size:22px;letter-spacing:8px}
 .lock .btn{margin-top:10px;min-width:200px}
+
+/* memory */
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.chip{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:20px;padding:6px 12px;font:inherit;font-size:13px}
+.chip.on{color:var(--text);border-color:var(--cyan);background:rgba(0,212,255,.2)}
+.mem-item{margin:10px 0}
+.mem-head{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.mem-title{font-weight:600;color:var(--cyan2)}
+.mem-tag{font-size:11px;border:1px solid var(--line);border-radius:12px;padding:2px 8px;color:var(--muted);white-space:nowrap}
+.mem-text{margin:6px 0;white-space:pre-wrap;word-wrap:break-word;font-size:14px;line-height:1.5}
+.mem-meta{font-size:11px;color:var(--muted)}
+.mem-actions{display:flex;gap:8px;margin-top:8px}
+.btn.small{padding:6px 12px;font-size:13px}
+.toggle{display:flex;align-items:flex-start;gap:10px;margin:14px 0 8px;font-size:14px;line-height:1.4}
+input[type=checkbox]{width:22px;height:22px;margin:2px 0 0;flex:none;accent-color:#00d4ff}
+.warn{color:#ffcf5a;font-size:12px;line-height:1.5}
+#mem-form{margin:12px 0}

@@ -89,7 +89,7 @@
     JARVIS.gemini.setModel($("model-name").value.trim() || JARVIS.config.defaultModel);
     note("சோதிக்கிறது…");
     try {
-      await JARVIS.gemini.ask([{ role: "user", text: "Reply with one word: OK" }]);
+      await JARVIS.gemini.ask([{ role: "user", text: "Reply with one word: OK" }], { noMemory: true });
       note("Key சரியாக வேலை செய்கிறது ✔");
     } catch (e) { note("✖ " + e.message); }
     JARVIS.dashboard.refreshStatus();
@@ -111,6 +111,7 @@
   /* ---------- Start ---------- */
   JARVIS.dashboard.init(openModule);
   JARVIS.chat.init();
+  JARVIS.memory.init();
   loadSettings();
   if (Sec.hasPin()) showLock("unlock");
 

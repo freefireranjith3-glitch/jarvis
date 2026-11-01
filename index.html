@@ -64,6 +64,40 @@
         </form>
       </section>
 
+      <!-- MEMORY -->
+      <section id="view-memory" class="view">
+        <h3 class="section">🗂️ Memory</h3>
+        <input id="mem-search" type="search" autocomplete="off" placeholder="தேடு…" />
+        <div id="mem-cats" class="chips"></div>
+        <div class="row">
+          <button id="mem-add-btn" type="button" class="btn">＋ புதியது</button>
+          <button id="mem-export" type="button" class="btn ghost">Backup எடு</button>
+          <button id="mem-import-btn" type="button" class="btn ghost">Backup மீட்டெடு</button>
+          <input id="mem-import" type="file" accept="application/json,.json" class="hidden" />
+        </div>
+
+        <form id="mem-form" class="card hidden">
+          <b id="mem-form-title">புதிய நினைவு</b>
+          <input id="mem-title" type="text" maxlength="100" autocomplete="off" placeholder="தலைப்பு (விருப்பம்)" />
+          <textarea id="mem-text" rows="5" maxlength="5000" placeholder="நினைவில் வைக்க வேண்டிய தகவல்…"></textarea>
+          <input id="mem-cat" type="text" maxlength="40" list="mem-cat-list" autocomplete="off" placeholder="வகை (எ.கா. குடும்பம்)" />
+          <datalist id="mem-cat-list"></datalist>
+          <div class="row">
+            <button type="submit" class="btn">சேமி</button>
+            <button id="mem-cancel" type="button" class="btn ghost">ரத்து</button>
+          </div>
+        </form>
+
+        <label class="toggle">
+          <input id="mem-use-chat" type="checkbox" />
+          <span>Chat-ல் என் நினைவுகளைப் பயன்படுத்து. ON ஆக இருந்தால், உங்கள் கேள்விக்குப் பொருத்தமான நினைவுகள் மட்டும் Google Gemini-க்கு அனுப்பப்படும்.</span>
+        </label>
+        <p class="warn">⚠ Password, ATM PIN, OTP போன்றவற்றை இங்கே சேமிக்க வேண்டாம். நினைவுகள் இன்னும் குறியாக்கம் செய்யப்படவில்லை (File Vault-ல் வரும்). Backup file-ம் குறியாக்கம் இல்லாதது.</p>
+
+        <div id="mem-count" class="muted small"></div>
+        <div id="mem-list"></div>
+      </section>
+
       <!-- SETTINGS -->
       <section id="view-settings" class="view">
         <h3 class="section">Gemini API Key</h3>
@@ -111,6 +145,7 @@
 
   <script src="config.js"></script>
   <script src="storage.js"></script>
+  <script src="memory.js"></script>
   <script src="security.js"></script>
   <script src="gemini.js"></script>
   <script src="chat.js"></script>

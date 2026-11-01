@@ -21,7 +21,7 @@ JARVIS.gemini = (function () {
   }
 
   // history: [{role:"user"|"ai", text:"..."}]
-  async function ask(history) {
+  async function ask(history, opts) {
     const key = getKey();
     if (!key) throw new Error("முதலில் Settings-ல் Gemini API key சேர்க்கவும்.");
     if (!navigator.onLine) throw new Error("Internet இல்லை. Offline-ல் AI பதில் சொல்ல முடியாது.");
@@ -31,13 +31,19 @@ JARVIS.gemini = (function () {
       parts: [{ text: m.text }]
     }));
 
+    let sysText = C.systemPrompt;
+    if (!(opts && opts.noMemory) && JARVIS.memory) {
+      const lastUser = history.filter((m) => m.role === "user").pop();
+      sysText += JARVIS.memory.contextFor(lastUser ? lastUser.text : "");
+    }
+
     let res;
     try {
       res = await fetch(C.apiBase + encodeURIComponent(getModel()) + ":generateContent", {
         method: "POST",
         headers: { "Content-Type": "application/json", "x-goog-api-key": key },
         body: JSON.stringify({
-          systemInstruction: { parts: [{ text: C.systemPrompt }] },
+          systemInstruction: { parts: [{ text: sysText }] },
           contents: contents
         })
       });
