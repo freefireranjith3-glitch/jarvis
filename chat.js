@@ -44,7 +44,7 @@ JARVIS.chat = (function () {
 
   async function send(text) {
     text = text.trim();
-    if (!text || busy) return;
+    if (!text || busy) return null;
     busy = true;
     $("send-btn").disabled = true;
 
@@ -52,12 +52,14 @@ JARVIS.chat = (function () {
     addBubble("user", text);
     save();
 
+    let result = null;
     const wait = addBubble("ai", "");
     wait.innerHTML = '<span class="typing">● ● ●</span>';
 
     try {
       const reply = await JARVIS.gemini.ask(history);
       history.push({ role: "ai", text: reply });
+      result = reply;
       save();
       wait.innerHTML = "";
       setAiText(wait, reply);
@@ -71,6 +73,7 @@ JARVIS.chat = (function () {
     $("messages").scrollTop = $("messages").scrollHeight;
     busy = false;
     $("send-btn").disabled = false;
+    return result;
   }
 
   function clear() { history = []; S.remove("chat"); render(); }

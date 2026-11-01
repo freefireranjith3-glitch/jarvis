@@ -30,7 +30,7 @@
   <div id="app" class="app">
     <header class="topbar">
       <div class="brand">J.A.R.V.I.S <span>SECURITY AI</span></div>
-      <div id="net-dot" class="dot" title="Network"></div>
+      <div class="right"><span id="wake-ind" class="wake-ind hidden">👂</span><div id="net-dot" class="dot" title="Network"></div></div>
     </header>
 
     <main>
@@ -104,6 +104,25 @@
       <section id="view-voice" class="view">
         <h3 class="section">🎙️ Voice AI</h3>
         <p id="voice-support" class="muted small"></p>
+
+        <h3 class="section">👂 Hey JARVIS</h3>
+        <label class="toggle">
+          <input id="wake-toggle" type="checkbox" />
+          <span>"Hey JARVIS" என்று சொன்னால் கேள் (App திறந்து திரையில் இருக்கும்போது மட்டும்)</span>
+        </label>
+        <label class="vlabel">Wake சொல்லை அறியும் மொழி</label>
+        <select id="wake-lang">
+          <option value="en-IN">English – "Hey JARVIS" (பரிந்துரை)</option>
+          <option value="ta-IN">தமிழ் – "ஹே ஜார்விஸ்"</option>
+        </select>
+        <label class="toggle">
+          <input id="wake-keepawake" type="checkbox" />
+          <span>கேட்கும்போது திரையை அணையாமல் வை (battery அதிகம் செலவாகும்)</span>
+        </label>
+        <p id="wake-status" class="muted small"></p>
+        <p class="warn">⚠ இது இயக்கத்தில் இருக்கும்போது Chrome உங்கள் பேச்சை தொடர்ந்து Google சேவையகத்துக்கு அனுப்பி எழுத்தாக்கும். Phone பூட்டியிருந்தால் அல்லது app மூடியிருந்தால் கேட்காது. PIN திரை பூட்டியிருந்தால் கட்டளை ஏற்காது. Wake சொல்லுக்குப் பின் கட்டளை தமிழிலும் சொல்லலாம் (மேலே தேர்ந்தெடுத்த "நான் பேசும் மொழி" படி).</p>
+
+        <h3 class="section">🎙️ பேச்சு அமைப்புகள்</h3>
 
         <label class="toggle">
           <input id="voice-auto" type="checkbox" />
@@ -238,6 +257,7 @@
   <script src="memory.js"></script>
   <script src="voice.js"></script>
   <script src="vault.js"></script>
+  <script src="wake.js"></script>
   <script src="security.js"></script>
   <script src="biometric.js"></script>
   <script src="gemini.js"></script>

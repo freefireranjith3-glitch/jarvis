@@ -114,6 +114,7 @@ JARVIS.voice = (function () {
   function listen(opts) {
     if (!sttSupported) { opts.onEnd("", "இந்த browser-ல் மைக் பேச்சு ஆதரவு இல்லை. Chrome பயன்படுத்துங்கள்."); return; }
     stopSpeak();
+    if (JARVIS.wake) JARVIS.wake.yieldMic(); // Hey JARVIS மைக்கை விட்டுக்கொடுக்கும்
     let finalText = "";
     let lastText = "";
     let errMsg = null;
@@ -137,6 +138,7 @@ JARVIS.voice = (function () {
     rec.onend = () => {
       listening = false;
       rec = null;
+      if (JARVIS.wake) JARVIS.wake.resumeMic();
       opts.onEnd((finalText || lastText).trim(), errMsg);
     };
 
@@ -146,6 +148,7 @@ JARVIS.voice = (function () {
     } catch (e) {
       listening = false;
       rec = null;
+      if (JARVIS.wake) JARVIS.wake.resumeMic();
       opts.onEnd("", "மைக்கைத் தொடங்க முடியவில்லை. மீண்டும் முயலுங்கள்.");
     }
   }
@@ -217,6 +220,7 @@ JARVIS.voice = (function () {
   return {
     init: init, speak: speak, stopSpeak: stopSpeak, toggleSpeak: toggleSpeak, speakIfAuto: speakIfAuto,
     listen: listen, stopListening: stopListening, isListening: isListening, autoSend: autoSend,
+    isSpeaking: isSpeaking, isAutoSpeak: autoSpeak,
     ttsSupported: ttsSupported, sttSupported: sttSupported,
     cleanForSpeech: cleanForSpeech, chunkText: chunkText
   };

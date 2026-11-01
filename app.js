@@ -12,6 +12,8 @@
     if (view === "home") JARVIS.dashboard.refreshStatus();
   }
 
+  JARVIS.go = go;
+
   function openModule(m) {
     if (m.view) return go(m.view);
     $("module-title").textContent = m.icon + " " + m.name;
@@ -144,6 +146,7 @@
   JARVIS.memory.init();
   JARVIS.voice.init();
   JARVIS.vault.init();
+  JARVIS.wake.init();
   loadSettings();
   refreshBioUI();
   JARVIS.biometric.init().then(refreshBioUI);

@@ -23,5 +23,5 @@ JARVIS.modules = [
   { id: "vault",    icon: "🔐", name: "File Vault",   desc: "பாதுகாப்பான ஆவணக் களஞ்சியம்",   status: "live", view: "vault" },
   { id: "security", icon: "🛡️", name: "Security",     desc: "PIN, Biometric, Privacy",     status: "live", view: "settings" },
   { id: "voice",    icon: "🎙️", name: "Voice AI",     desc: "தமிழ்/English பெண் குரல்",       status: "live", view: "voice" },
-  { id: "wake",     icon: "👂", name: "Hey JARVIS",   desc: "Wake-word (திட்டமிடப்பட்டது)",  status: "soon" }
+  { id: "wake",     icon: "👂", name: "Hey JARVIS",   desc: "Wake-word (App திறந்திருக்கும்போது)",  status: "live", view: "voice" }
 ];

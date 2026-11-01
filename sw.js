@@ -1,10 +1,10 @@
 // Service Worker: app files-ஐ phone-ல் cache செய்கிறது (offline-ல் app திறக்க).
 // Gemini API calls cache செய்யப்படுவதில்லை.
-const CACHE = "jarvis-v5";
+const CACHE = "jarvis-v6";
 const FILES = [
   "./", "./index.html", "./style.css", "./manifest.json",
   "./config.js", "./storage.js", "./security.js", "./biometric.js", "./gemini.js",
-  "./chat.js", "./dashboard.js", "./memory.js", "./voice.js", "./vault.js", "./app.js",
+  "./chat.js", "./dashboard.js", "./memory.js", "./voice.js", "./vault.js", "./wake.js", "./app.js",
   "./icon-192.png", "./icon-512.png"
 ];
 

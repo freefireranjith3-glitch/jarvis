@@ -111,3 +111,7 @@ input[type=range]{padding:0;accent-color:#00d4ff}
 .spk{display:block;margin-top:6px;background:none;border:1px solid var(--line);color:var(--cyan2);border-radius:10px;padding:2px 10px;font-size:14px}
 .mic{padding:0 14px;font-size:18px}
 .mic.rec{border-color:var(--danger);box-shadow:0 0 14px var(--danger);animation:blink 1s infinite}
+
+/* hey jarvis */
+.topbar .right{display:flex;gap:10px;align-items:center}
+.wake-ind{font-size:16px;animation:blink 2s infinite}
