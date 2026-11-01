@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#020b1a" />
+  <meta name="description" content="JARVIS SECURITY AI - personal AI assistant" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon-192.png" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <link rel="stylesheet" href="style.css" />
+  <title>JARVIS SECURITY AI</title>
+</head>
+<body>
+
+  <!-- ========== LOCK SCREEN (PIN) ========== -->
+  <div id="lock" class="lock hidden">
+    <div class="reactor small"><div class="ring r1"></div><div class="ring r2"></div><div class="core"></div></div>
+    <h2 id="lock-title">PIN உள்ளிடவும்</h2>
+    <p id="lock-sub" class="muted"></p>
+    <input id="lock-input" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="8" autocomplete="off" placeholder="••••" />
+    <input id="lock-input2" class="hidden" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="8" autocomplete="off" placeholder="மீண்டும் உள்ளிடவும்" />
+    <p id="lock-msg" class="error"></p>
+    <button id="lock-btn" class="btn">திறக்க</button>
+    <button id="lock-skip" class="link hidden">இப்போது வேண்டாம்</button>
+  </div>
+
+  <!-- ========== APP ========== -->
+  <div id="app" class="app">
+    <header class="topbar">
+      <div class="brand">J.A.R.V.I.S <span>SECURITY AI</span></div>
+      <div id="net-dot" class="dot" title="Network"></div>
+    </header>
+
+    <main>
+      <!-- HOME -->
+      <section id="view-home" class="view active">
+        <div class="hero">
+          <div class="reactor"><div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div><div class="core"></div></div>
+          <div id="clock" class="clock">--:--</div>
+          <div id="date" class="muted"></div>
+          <p id="greeting" class="greeting"></p>
+        </div>
+
+        <div class="grid status">
+          <div class="card"><small>AI Brain</small><b id="st-ai">-</b></div>
+          <div class="card"><small>Network</small><b id="st-net">-</b></div>
+          <div class="card"><small>PIN Lock</small><b id="st-pin">-</b></div>
+          <div class="card"><small>Model</small><b id="st-model">-</b></div>
+        </div>
+
+        <button class="btn wide" data-go="chat">💬 JARVIS-உடன் பேசு</button>
+
+        <h3 class="section">Modules</h3>
+        <div id="modules" class="grid modules"></div>
+      </section>
+
+      <!-- CHAT -->
+      <section id="view-chat" class="view">
+        <div id="messages" class="messages"></div>
+        <form id="chat-form" class="chat-form">
+          <textarea id="chat-input" rows="1" placeholder="JARVIS-இடம் கேளுங்கள்…"></textarea>
+          <button type="submit" id="send-btn" class="btn send">➤</button>
+        </form>
+      </section>
+
+      <!-- SETTINGS -->
+      <section id="view-settings" class="view">
+        <h3 class="section">Gemini API Key</h3>
+        <p class="muted">Google AI Studio-வில் இலவசமாக எடுக்கலாம். இந்த key உங்கள் phone-லேயே மட்டும் சேமிக்கப்படும்.</p>
+        <input id="api-key" type="password" autocomplete="off" placeholder="AIza..." />
+        <label class="muted">Model பெயர்</label>
+        <input id="model-name" type="text" autocomplete="off" />
+        <div class="row">
+          <button id="save-settings" class="btn">சேமி</button>
+          <button id="test-key" class="btn ghost">Key சோதி</button>
+        </div>
+        <p id="settings-msg" class="muted"></p>
+
+        <h3 class="section">Security</h3>
+        <div class="row">
+          <button id="pin-set" class="btn ghost">PIN அமை / மாற்று</button>
+          <button id="pin-remove" class="btn ghost">PIN நீக்கு</button>
+        </div>
+
+        <h3 class="section">Data</h3>
+        <div class="row">
+          <button id="clear-chat" class="btn ghost">Chat வரலாறு அழி</button>
+          <button id="clear-key" class="btn ghost danger">API key அழி</button>
+        </div>
+        <p class="muted small">JARVIS v0.1 – Chat + Dashboard. Memory, Vault, Voice பின்னர் சேரும்.</p>
+      </section>
+
+      <!-- PLACEHOLDER for future modules -->
+      <section id="view-module" class="view">
+        <div class="hero">
+          <div class="reactor small"><div class="ring r1"></div><div class="ring r2"></div><div class="core"></div></div>
+          <h2 id="module-title"></h2>
+          <p id="module-desc" class="muted"></p>
+          <p class="badge">விரைவில் – இன்னும் கட்டப்படவில்லை</p>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom">
+      <button data-go="home" class="active">🏠<span>Home</span></button>
+      <button data-go="chat">💬<span>Chat</span></button>
+      <button data-go="settings">⚙️<span>Settings</span></button>
+    </nav>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="storage.js"></script>
+  <script src="security.js"></script>
+  <script src="gemini.js"></script>
+  <script src="chat.js"></script>
+  <script src="dashboard.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
