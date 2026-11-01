@@ -1,0 +1,39 @@
+HTML buttons (add to a suitable screen, e.g. Chat):
+<button id="voice-start" type="button" class="btn">🎙️ Hey JARVIS – Start</button>
+<button id="voice-stop" type="button" class="btn ghost">■ Stop</button>
+
+Script tag (place after your other JARVIS scripts, before </body>):
+<script src="js/voice.js"></script>
+
+Basic UI wiring:
+<script>
+document.getElementById("voice-start").addEventListener("click", function () {
+  // Choose "ta-IN" for Tamil or "en-IN" for Indian English.
+  JARVIS.voice.start({ language: "ta-IN", wakePhraseRequired: true });
+});
+
+document.getElementById("voice-stop").addEventListener("click", function () {
+  JARVIS.voice.stop();
+});
+
+// This event fires after the user says "Hey JARVIS" followed by a command.
+// Connect this to your existing chat logic after inspecting chat.js/app.js.
+window.addEventListener("jarvis:voice-command", function (event) {
+  const spokenCommand = event.detail.command;
+  console.log("JARVIS command:", spokenCommand);
+
+  // Example only: put the recognized text into the existing chat input.
+  const input = document.getElementById("chat-input");
+  if (input) {
+    input.value = spokenCommand;
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+  }
+
+  // Do NOT auto-submit until you intentionally connect this to your chat form.
+});
+
+// Optional status/error events:
+window.addEventListener("jarvis:voice-start", () => console.log("Listening"));
+window.addEventListener("jarvis:voice-stop", () => console.log("Stopped"));
+window.addEventListener("jarvis:voice-error", e => alert(e.detail.message));
+</script>
